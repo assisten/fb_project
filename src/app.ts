@@ -1,17 +1,22 @@
 import express from "express";
-import mongoose from "mongoose";
 import bodyParser from "body-parser";
+import mongoose from "mongoose"
 import cors from "cors";
-import router from "./fbroutes/fbroutes";
+import Form from "./routes/Form.route"
+import FormEmail from"./routes/FormEmail.route";
+
+
 
 const app = express();
 const port  = 3000;
 app.use(bodyParser.json());
 app.use(cors());
-app.use("/api",router)
+app.use("/api/Form",Form)
+app.use("/api/sendmail",FormEmail)
 
 
-mongoose.connect('mongodb://localhost:27017/emty').then(()=>{
+
+mongoose.connect('mongodb://localhost:27017/fbcollections').then(()=>{
     console.log("MongoDB connected successfully");
 }).catch((e)=>{
     console.error(e);
