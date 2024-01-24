@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+// import User from "../models/user.model";
 
 const gmailAppPassword = "dryz urlf xjiu aerm";
 
@@ -20,7 +21,7 @@ export const sendEmail = async (
 ) => {
   const mailOptions = {
     from: "abdullahamjad7000@gmail.com",
-    to: email,
+    to:email,
     subject,
     text: body,
   };

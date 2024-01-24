@@ -2,20 +2,23 @@ import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
-// import Form from "./routes/Form.route";
-// import FormEmail from "./routes/FormEmail.route";
+
 import authRouter from "./routes/auth.routes";
+import machineRouter from "./routes/machine.routes";
+
+
+
 
 // middleware
 const app = express();
 const port = 3000;
 app.use(bodyParser.json());
 app.use(cors());
-// app.use("/api/Form",Form)
-// app.use("/api/sendmail",FormEmail)
+
 
 // routes
 app.use("/api/auth", authRouter);
+app.use("/api/Machine", machineRouter);
 
 mongoose
   .connect("mongodb://localhost:27017/fb-collection")

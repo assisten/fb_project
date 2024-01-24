@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import User from "../models/user.model";
 import randomString from "randomstring";
 import { sendEmail } from "../utils/mail.util";
+import  Jwt  from "jsonwebtoken";
 
 // Login controller
 const loginUser = async (req: Request, res: Response) => {
@@ -21,7 +22,10 @@ const loginUser = async (req: Request, res: Response) => {
       return res.status(400).json({ message: "Invalid username or password" });
     }
 
-    res.status(200).json({ message: "User logged in successfully" });
+    const token = Jwt.sign({ userId: user._id }, "secretkey");
+
+
+    res.status(200).json({ message: "User logged in successfully",token });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
@@ -67,7 +71,7 @@ const forgetPassword = async (req: Request, res: Response) => {
     const resetIdentifier = randomString.generate();
     const hashedResetIdentifier = await bcrypt.hash(resetIdentifier, 10);
     user.password = hashedResetIdentifier;
-
+    await user.save();
     sendEmail(
       email,
       "Password Reset",
