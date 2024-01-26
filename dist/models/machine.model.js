@@ -12,7 +12,7 @@ const machineSchema = new mongoose_1.default.Schema({
     time: { type: Date, default: Date.now, },
     temperature: { type: Number },
     box: { type: Number },
-    created_at: { type: Date, default: Date.now },
+    createdAt: { type: Date, default: Date.now },
 });
 const Machine = mongoose_1.default.model("machines", machineSchema);
 exports.default = Machine;

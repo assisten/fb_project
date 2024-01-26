@@ -18,7 +18,7 @@ app.use(cors());
 
 // routes
 app.use("/api/auth", authRouter);
-app.use("/api/Machine", machineRouter);
+app.use("/api/machine", machineRouter);
 
 mongoose
   .connect("mongodb://localhost:27017/fb-collection")
